@@ -1,0 +1,9 @@
+# Node.js dependencies
+node_modules/
+
+# Uploaded files (optional: only if you don't want them in repo)
+uploads/
+
+# Environment variables
+.env
+ 
