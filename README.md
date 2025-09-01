@@ -1,88 +1,104 @@
+
 # Reewild-Assign
 
- Reewild Assignment - Dish Recognition & Ingredients Estimation
+**Reewild Assignment - Dish Recognition & Ingredients Estimation**
 
-This project allows users to estimate ingredients from a dish name or from an image of the dish. The backend uses **Node.js**, **Express**, **Multer**, and **OpenAI API (GPT)** for dish recognition Through Image.
-**Gemini ai Studio api for Dish carbonfoot print.
----
-
-## Features
-
-- **POST /estimate**: Input a dish name and get ingredients.
-- **POST /estimate/image**: Upload an image of a dish and get ingredients.
-- Image uploads are stored in the `uploads/` folder.
-- Uses OpenAI GPT models for dish recognition and ingredient estimation.
+This project provides APIs to estimate ingredients from a dish name or from an image of the dish.  
+It uses **Node.js**, **Express**, **Multer**, and the **OpenAI API (GPT)** for dish recognition from images, and **Gemini AI Studio API** for calculating the dish's carbon footprint.
 
 ---
 
-## Prerequisites
+## Environment Variables
 
-- Node.js >= 18
-- npm or yarn
-- OpenAI API key
+Create a `.env` file in the root directory with the following:
 
----
+```env
+GEMINI_API_KEY=your_gemini_api_key_here
+OPENAI_API_KEY=your_openai_api_key_here
+PORT=5000
 
-## Setup Instructions
+Features
 
-1. **Clone the repository**
+POST /estimate → Input a dish name and get ingredients.
 
-```bash
+POST /estimate/image → Upload an image of a dish and get ingredients.
+
+Uploaded images are stored in the uploads/ folder.
+
+Uses OpenAI GPT models for dish recognition and ingredient estimation.
+
+Uses Gemini AI Studio API for carbon footprint estimation.
+
+Prerequisites
+
+Node.js >= 18
+
+npm or yarn
+
+OpenAI API key
+
+Gemini API key
+
+Setup Instructions
+
+Clone the repository
+
 git clone https://github.com/MDJAVEED7/ReeWild.git
 cd Reewild-Assign
-````
 
-2. **Install dependencies**
 
-```bash
+Install dependencies
+
 npm install
 # or
 yarn install
-```
 
-3. **Create a `.env` file** in the root folder
 
-```env
-OPENAI_API_KEY=your_openai_api_key_here
-PORT=5000
-```
+Create .env file
 
-> ⚠️ Do **not** commit `.env` to GitHub. `.gitignore` already prevents this.
+See Environment Variables
+ section above.
 
-4. **Run the project**
+Run the project
 
-```bash
 npm run dev
 # or
 ts-node src/index.ts
-```
 
-5. **API Usage**
+API Usage
+1. Estimate by Dish Name
 
-* **Estimate by dish name**
+Request
 
-```http
 POST /estimate
 Content-Type: application/json
 
 {
   "dish": "Pasta Carbonara"
 }
-```
 
-* **Estimate by image**
 
-```http
+Sample curl
+
+curl -X POST http://localhost:5000/estimate \
+  -H "Content-Type: application/json" \
+  -d '{"dish": "Pasta Carbonara"}'
+
+2. Estimate by Image
+
+Request
+
 POST /estimate/image
 Content-Type: multipart/form-data
 Field: image (select your file)
-```
 
----
 
-## Project Structure
+Sample curl
 
-```
+curl -X POST http://localhost:5000/estimate/image \
+  -F "image=@pasta.jpg"
+
+Project Structure
 Reewild-Assign/
 ├── src/
 │   ├── controllers/
@@ -95,12 +111,3 @@ Reewild-Assign/
 ├── package.json
 ├── tsconfig.json
 └── .gitignore
-```
-
----
-
-## Notes
-
-* Uploaded images are saved locally in `uploads/`.
-* OpenAI API key should remain secret.
-* Only push code to GitHub without `.env`.
